@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elricke Bronkhorst — Animal Care Specialist</title>
+  <meta name="description" content="Elricke Bronkhorst — Aspiring Veterinary Practice Assistant and Animal Care Specialist. PetSense College graduate, based in Berlin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Palette: Wildcare Forest ── */
+    :root {
+      --bg:            #FDF8F0;
+      --surface:       #F5EDD6;
+      --surface-alt:   #EDE0C0;
+      --primary:       #1B4D3E;
+      --primary-mid:   #266150;
+      --primary-light: #3A8A6B;
+      --accent:        #C9882A;
+      --accent-light:  #E8BF78;
+      --warm:          #8B4513;
+      --sage:          #6B8F71;
+      --text:          #1A160D;
+      --text-muted:    #5C4E35;
+      --text-faint:    #9B8C73;
+      --border:        #D8C9A8;
+      --border-light:  #EDE3CC;
+      --white:         #FFFFFF;
+      --shadow-sm:     0 1px 4px rgba(27,77,62,.07), 0 1px 2px rgba(27,77,62,.05);
+      --shadow-md:     0 4px 16px rgba(27,77,62,.10), 0 2px 6px rgba(27,77,62,.06);
+      --shadow-lg:     0 12px 40px rgba(27,77,62,.13), 0 4px 14px rgba(27,77,62,.08);
+      --radius-sm:     8px;
+      --radius-md:     16px;
+      --radius-lg:     24px;
+      --radius-xl:     36px;
+      --font-serif:    'Playfair Display', Georgia, serif;
+      --font-sans:     'Inter', system-ui, sans-serif;
+      --z-nav:         50;
+      --transition:    220ms cubic-bezier(.4,0,.2,1);
+      --transition-lg: 380ms cubic-bezier(.4,0,.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.65; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    .skip-link { position: absolute; top: -100px; left: 1rem; background: var(--primary); color: var(--white); padding: .5rem 1rem; border-radius: var(--radius-sm); font-size: .875rem; z-index: 100; transition: top var(--transition); }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── Nav ── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav); padding: 1.375rem 0; transition: background var(--transition-lg), box-shadow var(--transition-lg), padding var(--transition); }
+    .nav.scrolled { background: rgba(253,248,240,.95); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--border-light), var(--shadow-sm); padding: .75rem 0; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .nav-logo { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; color: var(--white); letter-spacing: -.01em; white-space: nowrap; transition: color var(--transition); }
+    .nav-logo em { font-style: italic; color: var(--accent-light); transition: color var(--transition); }
+    .nav.scrolled .nav-logo { color: var(--primary); }
+    .nav.scrolled .nav-logo em { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: .2rem; }
+    .nav-links a { font-size: .8rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.78); padding: .4rem .75rem; border-radius: var(--radius-sm); transition: color var(--transition), background var(--transition); }
+    .nav-links a:hover { color: var(--white); background: rgba(255,255,255,.1); }
+    .nav.scrolled .nav-links a { color: var(--text-muted); }
+    .nav.scrolled .nav-links a:hover { color: var(--primary); background: var(--surface); }
+    .nav-cta { background: var(--accent) !important; color: var(--white) !important; padding: .4rem 1rem !important; }
+    .nav-cta:hover { opacity: .9; }
+    .nav.scrolled .nav-cta { background: var(--primary) !important; }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 44px; height: 44px; border-radius: var(--radius-sm); cursor: pointer; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: transform var(--transition), opacity var(--transition), background var(--transition); }
+    .nav.scrolled .nav-toggle span { background: var(--text); }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-drawer { display: none; position: fixed; inset: 0; background: rgba(27,77,62,.97); backdrop-filter: blur(16px); z-index: calc(var(--z-nav) - 1); flex-direction: column; align-items: center; justify-content: center; gap: .5rem; opacity: 0; transform: translateY(-8px); transition: opacity var(--transition-lg), transform var(--transition-lg); }
+    .nav-drawer.open { display: flex; opacity: 1; transform: translateY(0); }
+    .nav-drawer a { font-family: var(--font-serif); font-size: 1.75rem; font-weight: 600; color: rgba(255,255,255,.85); padding: .6rem 2rem; border-radius: var(--radius-md); transition: color var(--transition), background var(--transition); }
+    .nav-drawer a:hover { color: var(--accent-light); background: rgba(255,255,255,.05); }
+
+    /* ── Hero — Forest / Nature ── */
+    .hero {
+      position: relative; min-height: 100vh; display: flex; align-items: center;
+      overflow: hidden; padding: 7rem 1.5rem 5rem;
+    }
+    /* Layered gradient — forest depth */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 100% 70% at 0% 40%, rgba(27,77,62,.95) 0%, rgba(27,77,62,.7) 35%, transparent 65%),
+        radial-gradient(ellipse 80% 80% at 100% 60%, rgba(107,143,113,.4) 0%, transparent 55%),
+        linear-gradient(160deg, #0D2A1F 0%, #173828 30%, #1F4A2E 55%, #2A5F3A 80%, #3A7040 100%);
+    }
+    /* Organic leaf/branch SVG pattern */
+    .hero-leaves {
+      position: absolute; inset: 0; pointer-events: none; opacity: .06;
+      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFFFFF' fill-rule='nonzero'%3E%3Cellipse cx='100' cy='50' rx='12' ry='38' transform='rotate(0 100 100)'/%3E%3Cellipse cx='100' cy='50' rx='12' ry='38' transform='rotate(45 100 100)'/%3E%3Cellipse cx='100' cy='50' rx='12' ry='38' transform='rotate(90 100 100)'/%3E%3Cellipse cx='100' cy='50' rx='12' ry='38' transform='rotate(135 100 100)'/%3E%3Ccircle cx='100' cy='100' r='6'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    /* Paw prints drifting right side */
+    .hero-paws {
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 3rem; opacity: .08; pointer-events: none;
+    }
+    .paw-svg { width: 60px; height: 60px; }
+    .hero-inner { position: relative; max-width: 1100px; margin: 0 auto; width: 100%; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: .6rem; font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 1.5rem; }
+    .hero-eyebrow-line { width: 24px; height: 1.5px; background: var(--accent); }
+    .hero-name { font-family: var(--font-serif); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 700; line-height: 1.06; letter-spacing: -.02em; color: var(--white); margin-bottom: .75rem; }
+    .hero-name em { font-style: italic; color: var(--accent-light); }
+    .hero-headline { font-size: clamp(1rem, 2.2vw, 1.25rem); font-weight: 400; color: rgba(255,255,255,.85); max-width: 580px; margin-bottom: 1rem; line-height: 1.6; font-family: var(--font-sans); }
+    .hero-tagline {
+      font-family: var(--font-serif); font-style: italic; font-size: 1.075rem;
+      color: rgba(255,255,255,.65); max-width: 520px; margin-bottom: 2.75rem; line-height: 1.75;
+      padding: .875rem 1.25rem; border-left: 3px solid var(--accent);
+      background: rgba(255,255,255,.04); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .875rem; margin-bottom: 3rem; }
+    .btn-primary { display: inline-flex; align-items: center; gap: .5rem; background: var(--accent); color: var(--white); font-family: var(--font-sans); font-size: .9375rem; font-weight: 600; padding: .875rem 1.875rem; border-radius: var(--radius-xl); transition: background var(--transition), transform var(--transition), box-shadow var(--transition); box-shadow: 0 4px 18px rgba(201,136,42,.4); cursor: pointer; }
+    .btn-primary:hover { background: #DA9F40; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,136,42,.5); }
+    .btn-outline { display: inline-flex; align-items: center; gap: .5rem; background: transparent; color: rgba(255,255,255,.9); font-family: var(--font-sans); font-size: .9375rem; font-weight: 500; padding: .875rem 1.875rem; border-radius: var(--radius-xl); border: 1.5px solid rgba(255,255,255,.35); transition: background var(--transition), border-color var(--transition), transform var(--transition); cursor: pointer; }
+    .btn-outline:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.65); transform: translateY(-1px); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; }
+    .hero-meta-item { display: flex; align-items: center; gap: .5rem; font-size: .8125rem; color: rgba(255,255,255,.45); font-weight: 400; }
+    .hero-meta-item svg { width: 13px; height: 13px; stroke: var(--accent-light); flex-shrink: 0; }
+
+    /* ── Shared Section ── */
+    .section { padding: 5.5rem 1.5rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--sage); margin-bottom: .5rem; display: flex; align-items: center; gap: .6rem; }
+    .section-eyebrow::before { content: ''; width: 16px; height: 1.5px; background: var(--sage); }
+    .section-title { font-family: var(--font-serif); font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 600; color: var(--primary); line-height: 1.2; margin-bottom: 1.25rem; }
+    .section-divider { width: 40px; height: 3px; border-radius: 2px; margin-bottom: 2.75rem; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .65s cubic-bezier(.4,0,.2,1), transform .65s cubic-bezier(.4,0,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1{transition-delay:.1s} .reveal-delay-2{transition-delay:.18s} .reveal-delay-3{transition-delay:.26s} .reveal-delay-4{transition-delay:.34s} .reveal-delay-5{transition-delay:.42s} .reveal-delay-6{transition-delay:.5s} .reveal-delay-7{transition-delay:.58s} .reveal-delay-8{transition-delay:.66s}
+    @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+    /* ── About ── */
+    .about-section { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; align-items: start; }
+    .about-text p { color: var(--text-muted); font-size: .9375rem; line-height: 1.88; margin-bottom: 1.1rem; }
+    .about-text p:last-of-type { margin-bottom: 0; }
+    .about-sidebar { display: flex; flex-direction: column; gap: 1.125rem; }
+    .about-card { background: var(--bg); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 1.5rem; transition: box-shadow var(--transition), transform var(--transition); cursor: default; position: relative; overflow: hidden; }
+    .about-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(to bottom, var(--primary), var(--sage)); border-radius: 3px 0 0 3px; opacity: 0; transition: opacity var(--transition); }
+    .about-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .about-card:hover::before { opacity: 1; }
+    .about-card-icon-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+    .about-card-icon { width: 36px; height: 36px; background: var(--surface); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .about-card-icon svg { width: 18px; height: 18px; stroke: var(--primary); }
+    .about-card h4 { font-family: var(--font-serif); font-size: .9375rem; font-weight: 600; color: var(--primary); }
+    .about-card p { font-size: .875rem; color: var(--text-muted); line-height: 1.6; }
+    .lang-chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .6rem; }
+    .lang-chip { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: .77rem; font-weight: 500; padding: .2rem .6rem; border-radius: 100px; }
+
+    /* ── Timeline ── */
+    .exp-section { background: var(--surface); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: .5rem; top: .25rem; bottom: .25rem; width: 2px; background: linear-gradient(to bottom, var(--accent), var(--border)); border-radius: 2px; }
+    .timeline-item { position: relative; padding-bottom: 2rem; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot { position: absolute; left: -1.75rem; top: .3rem; width: 12px; height: 12px; border-radius: 50%; background: var(--white); border: 2.5px solid var(--accent); box-shadow: 0 0 0 3px var(--surface); transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
+    .timeline-item:hover .timeline-dot { background: var(--accent); box-shadow: 0 0 0 3px var(--accent-light), 0 0 0 5px var(--surface); }
+    .timeline-card { background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.5rem 1.75rem; transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition); cursor: default; }
+    .timeline-card:hover { box-shadow: var(--shadow-md); transform: translateX(4px); border-color: var(--border); }
+    .timeline-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: .45rem .875rem; margin-bottom: .5rem; }
+    .timeline-role { font-family: var(--font-serif); font-size: 1.025rem; font-weight: 600; color: var(--primary); }
+    .timeline-company { font-size: .875rem; font-weight: 600; color: var(--accent); }
+    .timeline-period { font-size: .79rem; color: var(--text-faint); margin-left: auto; white-space: nowrap; }
+    .timeline-desc { font-size: .9125rem; color: var(--text-muted); line-height: 1.75; }
+
+    /* ── Certs ── */
+    .certs-section { background: var(--white); }
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(295px, 1fr)); gap: 1.125rem; }
+    .cert-card { background: var(--bg); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 1.375rem; display: flex; flex-direction: column; gap: .45rem; transition: box-shadow var(--transition), transform var(--transition); cursor: default; }
+    .cert-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .cert-card.pending { border-color: rgba(201,136,42,.35); background: linear-gradient(135deg, var(--bg) 65%, rgba(201,136,42,.06)); }
+    .cert-badge { display: inline-flex; align-items: center; gap: .3rem; font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: .22rem .6rem; border-radius: 100px; align-self: flex-start; }
+    .cert-badge.active { background: rgba(27,77,62,.1); color: var(--primary); }
+    .cert-badge.pending-badge { background: rgba(201,136,42,.15); color: #8B6020; }
+    .cert-title { font-family: var(--font-serif); font-size: .975rem; font-weight: 600; color: var(--primary); line-height: 1.35; }
+    .cert-issuer { font-size: .855rem; color: var(--text-muted); font-weight: 500; }
+    .cert-year { font-size: .79rem; color: var(--text-faint); }
+    .cert-note { font-size: .815rem; color: var(--text-muted); font-style: italic; line-height: 1.55; }
+
+    /* ── Skills ── */
+    .skills-section { background: var(--surface); }
+    .skills-group { margin-bottom: 2.25rem; }
+    .skills-group:last-child { margin-bottom: 0; }
+    .skills-group-title { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--primary-mid); margin-bottom: .875rem; display: flex; align-items: center; gap: .5rem; }
+    .skills-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .chip { background: var(--white); border: 1px solid var(--border); color: var(--text-muted); font-size: .875rem; font-weight: 400; padding: .4rem .9rem; border-radius: 100px; transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition); cursor: default; }
+    .chip:hover { background: var(--primary); border-color: var(--primary); color: var(--white); transform: translateY(-1px); }
+    .chip.highlight { background: rgba(27,77,62,.08); border-color: rgba(27,77,62,.2); color: var(--primary); font-weight: 500; }
+    .chip.highlight:hover { background: var(--primary); border-color: var(--primary); color: var(--white); }
+
+    /* ── Volunteer ── */
+    .volunteer-section { background: var(--bg); }
+    .volunteer-card { background: var(--white); border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 2.25rem 2.5rem; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem 2rem; align-items: start; transition: box-shadow var(--transition); box-shadow: var(--shadow-sm); }
+    .volunteer-card:hover { box-shadow: var(--shadow-lg); }
+    .volunteer-icon-wrap { width: 56px; height: 56px; background: linear-gradient(135deg, rgba(27,77,62,.12), rgba(27,77,62,.05)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .volunteer-icon-wrap svg { width: 26px; height: 26px; stroke: var(--primary); }
+    .volunteer-content h3 { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--primary); margin-bottom: .25rem; }
+    .volunteer-meta { font-size: .875rem; color: var(--accent); font-weight: 600; margin-bottom: .6rem; }
+    .volunteer-content p { font-size: .9rem; color: var(--text-muted); line-height: 1.78; }
+    .interests-list { display: flex; flex-wrap: wrap; gap: .65rem .875rem; }
+    .interest-item { display: flex; align-items: center; gap: .45rem; font-size: .9rem; color: var(--text-muted); font-weight: 400; }
+    .interest-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+
+    /* ── Contact ── */
+    .contact-section {
+      position: relative; overflow: hidden;
+      background: linear-gradient(150deg, #0D2A1F 0%, #173828 35%, #1B4D3E 60%, #266150 100%);
+    }
+    .contact-organic {
+      position: absolute; inset: 0; pointer-events: none; opacity: .05;
+      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='100' cy='50' rx='20' ry='60' fill='%23FFFFFF' transform='rotate(20 100 100)'/%3E%3Cellipse cx='100' cy='50' rx='20' ry='60' fill='%23FFFFFF' transform='rotate(-20 100 100)'/%3E%3C/svg%3E");
+    }
+    .contact-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 85% 25%, rgba(201,136,42,.12) 0%, transparent 55%), radial-gradient(ellipse 50% 60% at 15% 80%, rgba(107,143,113,.10) 0%, transparent 50%); pointer-events: none; }
+    .contact-inner { position: relative; max-width: 680px; margin: 0 auto; text-align: center; }
+    .contact-inner .section-eyebrow { color: var(--accent-light); justify-content: center; }
+    .contact-inner .section-eyebrow::before { background: var(--accent-light); }
+    .contact-inner .section-title { color: var(--white); }
+    .contact-inner .section-divider { margin-left: auto; margin-right: auto; }
+    .contact-intro { font-family: var(--font-serif); font-style: italic; font-size: 1.0625rem; color: rgba(255,255,255,.72); line-height: 1.82; margin-bottom: 2.5rem; }
+    .contact-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    .btn-contact-primary { display: inline-flex; align-items: center; gap: .6rem; background: var(--accent); color: var(--white); font-family: var(--font-sans); font-size: .9375rem; font-weight: 600; padding: .9rem 2rem; border-radius: var(--radius-xl); transition: background var(--transition), transform var(--transition), box-shadow var(--transition); box-shadow: 0 4px 18px rgba(201,136,42,.38); cursor: pointer; }
+    .btn-contact-primary:hover { background: #DA9F40; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,136,42,.48); }
+    .btn-contact-outline { display: inline-flex; align-items: center; gap: .6rem; background: transparent; color: rgba(255,255,255,.85); font-family: var(--font-sans); font-size: .9375rem; font-weight: 500; padding: .9rem 2rem; border-radius: var(--radius-xl); border: 1.5px solid rgba(255,255,255,.3); transition: background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition); cursor: pointer; }
+    .btn-contact-outline:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.5); color: var(--white); transform: translateY(-2px); }
+    .btn-contact-outline svg, .btn-contact-primary svg { width: 18px; height: 18px; }
+
+    footer { background: #091A12; color: rgba(255,255,255,.4); text-align: center; padding: 1.75rem 1.5rem; font-size: .8rem; }
+    footer a { color: rgba(255,255,255,.6); transition: color var(--transition); }
+    footer a:hover { color: rgba(255,255,255,.9); }
+
+    @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } .volunteer-card { grid-template-columns: 1fr; gap: 1rem; } }
+    @media (max-width: 700px) { .nav-links { display: none; } .nav-toggle { display: flex; } .hero { padding: 6rem 1.25rem 4rem; } .section { padding: 3.5rem 1.25rem; } .timeline { padding-left: 1.5rem; } .timeline-period { margin-left: 0; } .volunteer-card { padding: 1.5rem; } .hero-paws { display: none; } }
+    @media (max-width: 480px) { .certs-grid { grid-template-columns: 1fr; } .contact-buttons { flex-direction: column; align-items: center; } .btn-contact-primary, .btn-contact-outline { width: 100%; justify-content: center; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#" aria-label="Elricke Bronkhorst home">Elricke <em>Bronkhorst</em></a>
+      <div class="nav-links" role="list">
+        <a href="#about" role="listitem">About</a>
+        <a href="#experience" role="listitem">Experience</a>
+        <a href="#certifications" role="listitem">Certifications</a>
+        <a href="#skills" role="listitem">Skills</a>
+        <a href="#volunteer" role="listitem">Volunteer</a>
+        <a href="#contact" class="nav-cta" role="listitem">Get in Touch</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="#about" class="drawer-link">About</a>
+    <a href="#experience" class="drawer-link">Experience</a>
+    <a href="#certifications" class="drawer-link">Certifications</a>
+    <a href="#skills" class="drawer-link">Skills</a>
+    <a href="#volunteer" class="drawer-link">Volunteer</a>
+    <a href="#contact" class="drawer-link">Get in Touch</a>
+  </div>
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-name">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-leaves" aria-hidden="true"></div>
+      <!-- Decorative floating paw prints -->
+      <div class="hero-paws" aria-hidden="true">
+        <svg class="paw-svg" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="35" cy="22" rx="10" ry="13"/><ellipse cx="55" cy="16" rx="10" ry="13"/><ellipse cx="75" cy="22" rx="10" ry="13"/><ellipse cx="22" cy="38" rx="10" ry="13"/>
+          <path d="M50 90 C25 90 12 72 12 55 C12 42 24 34 50 34 C76 34 88 42 88 55 C88 72 75 90 50 90Z"/>
+        </svg>
+        <svg class="paw-svg" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg" style="opacity:.6;transform:rotate(15deg) scale(.7)">
+          <ellipse cx="35" cy="22" rx="10" ry="13"/><ellipse cx="55" cy="16" rx="10" ry="13"/><ellipse cx="75" cy="22" rx="10" ry="13"/><ellipse cx="22" cy="38" rx="10" ry="13"/>
+          <path d="M50 90 C25 90 12 72 12 55 C12 42 24 34 50 34 C76 34 88 42 88 55 C88 72 75 90 50 90Z"/>
+        </svg>
+        <svg class="paw-svg" viewBox="0 0 100 100" fill="white" xmlns="http://www.w3.org/2000/svg" style="opacity:.4;transform:rotate(-10deg) scale(.5)">
+          <ellipse cx="35" cy="22" rx="10" ry="13"/><ellipse cx="55" cy="16" rx="10" ry="13"/><ellipse cx="75" cy="22" rx="10" ry="13"/><ellipse cx="22" cy="38" rx="10" ry="13"/>
+          <path d="M50 90 C25 90 12 72 12 55 C12 42 24 34 50 34 C76 34 88 42 88 55 C88 72 75 90 50 90Z"/>
+        </svg>
+      </div>
+      <div class="hero-inner">
+        <div class="hero-eyebrow reveal"><span class="hero-eyebrow-line"></span>Berlin, Germany · Open to Opportunities</div>
+        <h1 class="hero-name reveal reveal-delay-1" id="hero-name">Elricke<br /><em>Bronkhorst</em></h1>
+        <p class="hero-headline reveal reveal-delay-2">Aspiring Veterinary Practice Assistant &amp; Animal Care Specialist — a lifelong bond with animals turned into a calling.</p>
+        <blockquote class="hero-tagline reveal reveal-delay-3">"The best part of any day is being exactly where the animals need you to be."</blockquote>
+        <div class="hero-actions reveal reveal-delay-4">
+          <a href="#contact" class="btn-primary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Get in Touch
+          </a>
+          <a href="#experience" class="btn-outline">View Experience</a>
+        </div>
+        <div class="hero-meta reveal reveal-delay-5">
+          <span class="hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Berlin, Germany · SA origin</span>
+          <span class="hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>PetSense College Diploma · 2024–2025</span>
+          <span class="hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>4 languages · multilingual</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section about-section" id="about" aria-labelledby="about-title">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">About</p>
+        <h2 class="section-title reveal reveal-delay-1" id="about-title">The Story Behind the Work</h2>
+        <div class="section-divider reveal reveal-delay-2"></div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p class="reveal reveal-delay-2">Animals have always been at the centre of my life — not just as companions, but as a vocation I have been working hard to turn into a career.</p>
+            <p class="reveal reveal-delay-3">I recently completed the Pet Care &amp; Veterinary Practice Assistant diploma through PetSense College, where I developed a solid foundation in animal health, welfare, and veterinary support. This formal qualification adds structure to years of hands-on experience: almost four years actively training and competing in dog obedience and agility, 1.5 years volunteering at a Pitbull rescue organisation, and a lifelong involvement with horses — both as a rider and a caretaker.</p>
+            <p class="reveal reveal-delay-4">Alongside my animal care journey, I spent 14 years as a certified FIH Level 1 hockey umpire and five years as a paid part-time hockey coach at Wagpos High School — roles that developed strong skills in leadership, youth mentorship, and composure under pressure.</p>
+            <p class="reveal reveal-delay-5">Originally from South Africa, I relocated to the Netherlands in September 2023 and most recently to Berlin in March 2025. I hold a Dutch B1 certificate and am actively learning German.</p>
+          </div>
+          <div class="about-sidebar">
+            <div class="about-card reveal reveal-delay-2">
+              <div class="about-card-icon-row"><div class="about-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><h4>Based in Berlin</h4></div>
+              <p>Relocated from the Netherlands (Mar 2025). Open to veterinary, animal care, and related roles across Germany.</p>
+            </div>
+            <div class="about-card reveal reveal-delay-3">
+              <div class="about-card-icon-row"><div class="about-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>Languages</h4></div>
+              <div class="lang-chips"><span class="lang-chip">Afrikaans (Native)</span><span class="lang-chip">English (Fluent)</span><span class="lang-chip">Dutch (B1/B2)</span><span class="lang-chip">German (Beginner)</span></div>
+            </div>
+            <div class="about-card reveal reveal-delay-4">
+              <div class="about-card-icon-row"><div class="about-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h4>14+ Years Experience</h4></div>
+              <p>Spanning animal care, business ownership, coaching, and client-facing service.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section exp-section" id="experience" aria-labelledby="experience-title">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">Career</p>
+        <h2 class="section-title reveal reveal-delay-1" id="experience-title">Professional Experience</h2>
+        <div class="section-divider reveal reveal-delay-2"></div>
+        <div class="timeline">
+          <div class="timeline-item reveal reveal-delay-1"><div class="timeline-dot" aria-hidden="true"></div><div class="timeline-card"><div class="timeline-meta"><span class="timeline-role">Food Service Employee</span><span class="timeline-company">HEMA · Netherlands</span><span class="timeline-period">Jan 2024 – Mar 2025</span></div><p class="timeline-desc">Managed food preparation and counter service in a high-volume retail food environment. Responsible for stock management including placing orders, cash handling, and team coordination. Received an excellent written recommendation from manager upon leaving to relocate to Germany.</p></div></div>
+          <div class="timeline-item reveal reveal-delay-2"><div class="timeline-dot" aria-hidden="true"></div><div class="timeline-card"><div class="timeline-meta"><span class="timeline-role">Beautician &amp; Owner</span><span class="timeline-company">Lustrous Lashes · Self-employed, South Africa</span><span class="timeline-period">Feb 2021 – Sep 2023</span></div><p class="timeline-desc">Founded and operated a solo lash extension studio averaging 10–15 clients per week. Built the full client base through word of mouth with zero paid marketing. Managed all appointments, treatments, client relations, and business administration independently.</p></div></div>
+          <div class="timeline-item reveal reveal-delay-3"><div class="timeline-dot" aria-hidden="true"></div><div class="timeline-card"><div class="timeline-meta"><span class="timeline-role">Part-time Hockey Coach</span><span class="timeline-company">Wagpos High School · South Africa</span><span class="timeline-period">2016 – 2021</span></div><p class="timeline-desc">Coached school hockey as a paid part-time role over five seasons. Worked with Grade 10–12 girls teams and one season with an under-16 boys team. Player development, training sessions, and match preparation.</p></div></div>
+          <div class="timeline-item reveal reveal-delay-4"><div class="timeline-dot" aria-hidden="true"></div><div class="timeline-card"><div class="timeline-meta"><span class="timeline-role">General Receptionist &amp; Administrator</span><span class="timeline-company">De Ridder Attorneys · South Africa</span><span class="timeline-period">Jan 2015 – Mar 2018</span></div><p class="timeline-desc">Front-desk management for a legal firm: visitor management, attorney diary management, call routing, correspondence, and office operations.</p></div></div>
+          <div class="timeline-item reveal reveal-delay-5"><div class="timeline-dot" aria-hidden="true"></div><div class="timeline-card"><div class="timeline-meta"><span class="timeline-role">Entrepreneur — Custom Pet Equipment</span><span class="timeline-company">Self-employed · South Africa</span><span class="timeline-period">Jan 2015 – Mar 2018</span></div><p class="timeline-desc">Designed and manufactured custom dog equipment: collars, belts, body vests, and leashes. Managed production, sales, and customer relationships. Run concurrently alongside full-time employment.</p></div></div>
+          <div class="timeline-item reveal reveal-delay-6"><div class="timeline-dot" aria-hidden="true"></div><div class="timeline-card"><div class="timeline-meta"><span class="timeline-role">Beautician</span><span class="timeline-company">Sumsare Hair &amp; Beauty · South Africa</span><span class="timeline-period">Jan 2014 – Mar 2015</span></div><p class="timeline-desc">Nail care, skincare, and beauty treatments. Client consultations, scheduling, product sales.</p></div></div>
+          <div class="timeline-item reveal reveal-delay-7"><div class="timeline-dot" aria-hidden="true"></div><div class="timeline-card"><div class="timeline-meta"><span class="timeline-role">Beautician &amp; Owner</span><span class="timeline-company">Le Visage Beauty · South Africa</span><span class="timeline-period">Jan 2013 – Dec 2013</span></div><p class="timeline-desc">Founded and operated a standalone rented beauty salon averaging 20 clients per week. Full business operations, client base building, bookings, and payments.</p></div></div>
+          <div class="timeline-item reveal reveal-delay-8"><div class="timeline-dot" aria-hidden="true"></div><div class="timeline-card"><div class="timeline-meta"><span class="timeline-role">Receptionist &amp; Beautician</span><span class="timeline-company">Bella Donna BeauTé · South Africa</span><span class="timeline-period">Jan 2011 – Dec 2012</span></div><p class="timeline-desc">Combined front-desk reception with beauty treatment delivery. Call management, appointments, visitor welcome, payments.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="section certs-section" id="certifications" aria-labelledby="certs-title">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">Credentials</p>
+        <h2 class="section-title reveal reveal-delay-1" id="certs-title">Certifications &amp; Education</h2>
+        <div class="section-divider reveal reveal-delay-2"></div>
+        <div class="certs-grid">
+          <div class="cert-card pending reveal reveal-delay-1"><span class="cert-badge pending-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Awaiting Result</span><h3 class="cert-title">Pet Care &amp; Veterinary Practice Assistant</h3><p class="cert-issuer">PetSense College · Online</p><p class="cert-year">2024 – 2025</p><p class="cert-note">Diploma submitted April 2025. Covers animal health, welfare, and veterinary support fundamentals.</p></div>
+          <div class="cert-card reveal reveal-delay-2"><span class="cert-badge active"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Certified</span><h3 class="cert-title">FIH Hockey Umpire — Level 1</h3><p class="cert-issuer">Fédération Internationale de Hockey · South Africa</p><p class="cert-year">Certified 2008 · Officiated 2008–2022</p><p class="cert-note">Officiated school hockey at competitive level for 14 years.</p></div>
+          <div class="cert-card reveal reveal-delay-3"><span class="cert-badge active"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Certified</span><h3 class="cert-title">Dutch Language Certificate — B1</h3><p class="cert-issuer">Official Dutch Language Examination · Netherlands</p><p class="cert-year">2023 – 2024</p></div>
+          <div class="cert-card reveal reveal-delay-4"><span class="cert-badge active"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Certified</span><h3 class="cert-title">International Semi-Permanent Eyelash Extensions</h3><p class="cert-issuer">Luscious Lashes International</p><p class="cert-year">2021</p></div>
+          <div class="cert-card reveal reveal-delay-5"><span class="cert-badge active"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Certified</span><h3 class="cert-title">Nimue Basic Rejuvenation Programme</h3><p class="cert-issuer">Nimue Skincare · Theory &amp; Application</p><p class="cert-year">2014</p></div>
+          <div class="cert-card reveal reveal-delay-6"><span class="cert-badge active"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Certified</span><h3 class="cert-title">Environ Retail &amp; Professional Facial Treatments</h3><p class="cert-issuer">Environ Skincare</p><p class="cert-year">2012</p></div>
+          <div class="cert-card reveal reveal-delay-7"><span class="cert-badge active"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Completed</span><h3 class="cert-title">Grade 12 / Matric Certificate</h3><p class="cert-issuer">Hartbeespoort High School · South Africa</p><p class="cert-year">2010</p><p class="cert-note">Subjects: Afrikaans, English, Mathematics, Geometry, Biology, Computer Studies</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section skills-section" id="skills" aria-labelledby="skills-title">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">Expertise</p>
+        <h2 class="section-title reveal reveal-delay-1" id="skills-title">Skills &amp; Capabilities</h2>
+        <div class="section-divider reveal reveal-delay-2"></div>
+        <div class="skills-group reveal reveal-delay-2"><h3 class="skills-group-title">Animal Care</h3><div class="chips"><span class="chip highlight">Animal handling</span><span class="chip highlight">Dog obedience training</span><span class="chip highlight">Dog agility</span><span class="chip highlight">Equestrian care</span><span class="chip highlight">Shelter volunteering</span><span class="chip highlight">Veterinary practice assistance</span><span class="chip highlight">Pet care</span></div></div>
+        <div class="skills-group reveal reveal-delay-3"><h3 class="skills-group-title">Professional</h3><div class="chips"><span class="chip">Team coordination</span><span class="chip">Stock management</span><span class="chip">Cash handling</span><span class="chip">Food preparation</span><span class="chip">Client relations</span><span class="chip">Appointment scheduling</span><span class="chip">Business administration</span><span class="chip">Microsoft Office</span></div></div>
+        <div class="skills-group reveal reveal-delay-4"><h3 class="skills-group-title">Beauty &amp; Aesthetics</h3><div class="chips"><span class="chip">Eyelash extensions</span><span class="chip">Nail care &amp; manicure/pedicure</span><span class="chip">Skincare &amp; facial treatments</span><span class="chip">Salon hygiene &amp; sanitation</span><span class="chip">Client consultation</span><span class="chip">Retail product sales</span></div></div>
+        <div class="skills-group reveal reveal-delay-5"><h3 class="skills-group-title">Leadership &amp; Sport</h3><div class="chips"><span class="chip">Youth coaching &amp; mentorship</span><span class="chip">Sports officiating (FIH Level 1)</span><span class="chip">Leadership under pressure</span><span class="chip">Hockey coaching</span></div></div>
+      </div>
+    </section>
+
+    <!-- Volunteer -->
+    <section class="section volunteer-section" id="volunteer" aria-labelledby="volunteer-title">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal">Giving Back</p>
+        <h2 class="section-title reveal reveal-delay-1" id="volunteer-title">Volunteer Experience</h2>
+        <div class="section-divider reveal reveal-delay-2"></div>
+        <div class="volunteer-card reveal reveal-delay-2">
+          <div class="volunteer-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="volunteer-content">
+            <h3>Animal Care Volunteer</h3>
+            <p class="volunteer-meta">Pitbull Rescue Organisation · ~1.5 years · South Africa</p>
+            <p>Cleaned kennels, walked and socialised dogs, and provided care to animals in rehabilitation. Developed confidence handling large, strong-breed dogs in shelter environments.</p>
+          </div>
+        </div>
+        <div style="margin-top: 3rem;">
+          <p class="section-eyebrow reveal" style="margin-bottom: .5rem;">Beyond Work</p>
+          <h3 class="section-title reveal reveal-delay-1" style="font-size: 1.3rem; margin-bottom: 1rem;" id="interests-title">Interests &amp; Activities</h3>
+          <div class="interests-list reveal reveal-delay-2">
+            <span class="interest-item">Dog obedience training &amp; agility (4+ years active competitor)</span>
+            <span class="interest-item">Equestrian riding &amp; horse care</span>
+            <span class="interest-item">Animal shelter volunteering</span>
+            <span class="interest-item">Hockey coaching &amp; FIH-certified umpiring (14 years)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="contact-organic" aria-hidden="true"></div>
+      <div class="contact-glow" aria-hidden="true"></div>
+      <div class="section-inner contact-inner">
+        <p class="section-eyebrow reveal">Contact</p>
+        <h2 class="section-title reveal reveal-delay-1" id="contact-title">Let's Work Together</h2>
+        <div class="section-divider reveal reveal-delay-2"></div>
+        <p class="contact-intro reveal reveal-delay-2">I'm actively looking for veterinary practice assistant and animal care roles in Berlin and Germany. If you're looking for someone who brings genuine passion, formal training, and real hands-on experience with animals — I'd love to hear from you.</p>
+        <div class="contact-buttons reveal reveal-delay-3">
+          <a href="mailto:belricke@outlook.com" class="btn-contact-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            belricke@outlook.com
+          </a>
+          <a href="https://www.linkedin.com/in/elricke-bronkhorst-a738b6267" target="_blank" rel="noopener noreferrer" class="btn-contact-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2025 Elricke Bronkhorst &nbsp;·&nbsp; Berlin, Germany &nbsp;·&nbsp; <a href="mailto:belricke@outlook.com">belricke@outlook.com</a></p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    const toggle = document.getElementById('nav-toggle'), drawer = document.getElementById('nav-drawer');
+    toggle.addEventListener('click', () => { const o = drawer.classList.toggle('open'); toggle.classList.toggle('open', o); toggle.setAttribute('aria-expanded', String(o)); document.body.style.overflow = o ? 'hidden' : ''; });
+    drawer.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', () => { drawer.classList.remove('open'); toggle.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }));
+    document.addEventListener('keydown', e => { if(e.key==='Escape'){drawer.classList.remove('open');toggle.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.body.style.overflow='';} });
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} }), { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', function(e){ const id=this.getAttribute('href').slice(1); if(!id)return; const t=document.getElementById(id); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});} }));
+  </script>
+</body>
+</html>
